@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            height: 100vh;
+            width: 100%;
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to bottom right,white 20%,pink);
+        }
+        .d1{
+            display: flex;
+            /* border: 2px solid red; */
+        }
+        #c1{
+            margin-top: 1.5%;
+            /* border: 2px solid rgb(50, 19, 175); */
+            width: 100%;
+            padding: 10px;
+        }
+        #c2{
+            /* border: 2px solid black; */
+            height: 180px;
+            width: 180px;
+        }
+        #c2 img{
+            height: 180px;
+            width: 180px;
+        }
+        hr{
+            margin-top: 10px;
+        }
+        .p1{
+            border: 2px solid black;
+            border-radius: 100%;
+            width: 43%;
+            height: 55px;
+            background-color: beige;
+            margin-top: 15px;
+            color: black;
+            font-size: 2.5rem;
+            font-weight: bolder;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            opacity: 0;
+            letter-spacing: 2px;
+            transform: translateY(40px) scale(0.95);
+            filter: blur(8px);
+            animation: pop 1s ease-out forwards;
+            animation-delay: 1s;
+        }
+        @keyframes pop {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+                filter: blur(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+        #k1{
+            width: 50%;
+        }
+        b{
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: x-large;
+        }
+        table {
+  width: 98%;
+  margin: auto;
+  border-collapse: collapse;
+  background: #fff7cc;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+th, td {
+  border: 2px solid #ffd166;
+  padding: 12px;
+  font-size: 18px;
+}
+
+th {
+  background: #ffb703;
+}
+
+button {
+  font-size: 18px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: #06d6a0;
+}
+
+button:hover {
+  background: #118ab2;
+  color: white;
+}
+    </style>
+</head>
+<body>
+    <div class="d1">
+        <div id="c2"><img src="{{url_for('static',filename='images/10.png')}}" alt="cartoon"></div>
+        <div id="c1">  {% if session.get('name')  %}
+            Welcome, <b>Name:{{ session['name'] }} | Phone No:{{ session.get('pno', 'N/A') }} |
+            Email-ID: {{ session.get('email', 'N/A') }}</b>
+            {% else %}
+            Welcome, Guest
+            {% endif %}
+            <hr>
+            <center><h1 class="p1">RHYMING WORDS</h1></center>
+            <center><hr id="k1"></center>
+        </div>
+    </div>
+    <table>
+  <thead>
+    <tr>
+      <th>Word</th>
+      <th>Rhyme 1</th>
+      <th>Rhyme 2</th>
+      <th>Rhyme 3</th>
+      <th>Speak</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+      <td>Cat</td><td>Bat</td><td>Hat</td><td>Rat</td>
+      <td><button onclick="speakRow(this)">🔊</button></td>
+    </tr>
+    <tr>
+      <td>Dog</td><td>Log</td><td>Fog</td><td>Hog</td>
+      <td><button onclick="speakRow(this)">🔊</button></td>
+    </tr>
+    <tr>
+      <td>Sun</td><td>Fun</td><td>Run</td><td>Bun</td>
+      <td><button onclick="speakRow(this)">🔊</button></td>
+    </tr>
+    <tr>
+      <td>Ball</td><td>Call</td><td>Tall</td><td>Wall</td>
+      <td><button onclick="speakRow(this)">🔊</button></td>
+    </tr>
+    <tr>
+      <td>Pen</td><td>Hen</td><td>Men</td><td>Ten</td>
+      <td><button onclick="speakRow(this)">🔊</button></td>
+    </tr>
+    <tr>
+      <td>Car</td><td>Far</td><td>Star</td><td>Jar</td>
+      <td><button onclick="speakRow(this)">🔊</button></td>
+    </tr>
+    <tr>
+      <td>Book</td><td>Look</td><td>Cook</td><td>Hook</td>
+      <td><button onclick="speakRow(this)">🔊</button></td>
+    </tr>
+    <tr>
+      <td>Tree</td><td>Bee</td><td>Free</td><td>See</td>
+      <td><button onclick="speakRow(this)">🔊</button></td>
+    </tr>
+    <tr>
+      <td>Hat</td><td>Cat</td><td>Bat</td><td>Rat</td>
+      <td><button onclick="speakRow(this)">🔊</button></td>
+    </tr>
+    <tr>
+      <td>Pan</td><td>Man</td><td>Fan</td><td>Can</td>
+      <td><button onclick="speakRow(this)">🔊</button></td>
+    </tr>
+
+    <tr>
+      <td>Fox</td><td>Box</td><td>Rock</td><td>Socks</td>
+      <td><button onclick="speakRow(this)">🔊</button></td>
+    </tr>
+    <tr>
+      <td>Light</td><td>Night</td><td>Bright</td><td>Fight</td>
+      <td><button onclick="speakRow(this)">🔊</button></td>
+    </tr>
+    <tr>
+      <td>Rain</td><td>Train</td><td>Main</td><td>Pain</td>
+      <td><button onclick="speakRow(this)">🔊</button></td>
+    </tr>
+    <tr>
+      <td>Boat</td><td>Goat</td><td>Coat</td><td>Float</td>
+      <td><button onclick="speakRow(this)">🔊</button></td>
+    </tr>
+    <tr>
+      <td>Duck</td><td>Luck</td><td>Truck</td><td>Pluck</td>
+      <td><button onclick="speakRow(this)">🔊</button></td>
+    </tr>
+    <tr>
+      <td>Fish</td><td>Dish</td><td>Wish</td><td>Swish</td>
+      <td><button onclick="speakRow(this)">🔊</button></td>
+    </tr>
+    <tr>
+      <td>Chair</td><td>Hair</td><td>Fair</td><td>Pair</td>
+      <td><button onclick="speakRow(this)">🔊</button></td>
+    </tr>
+    <tr>
+      <td>Moon</td><td>Spoon</td><td>June</td><td>Tune</td>
+      <td><button onclick="speakRow(this)">🔊</button></td>
+    </tr>
+    <tr>
+      <td>Bed</td><td>Red</td><td>Said</td><td>Fed</td>
+      <td><button onclick="speakRow(this)">🔊</button></td>
+    </tr>
+    <tr>
+      <td>Play</td><td>Day</td><td>Say</td><td>Way</td>
+      <td><button onclick="speakRow(this)">🔊</button></td>
+    </tr>
+    <tr>
+  <td>Cup</td><td>Pup</td><td>Sup</td><td>Up</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Bag</td><td>Tag</td><td>Rag</td><td>Wag</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Top</td><td>Mop</td><td>Hop</td><td>Pop</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Ring</td><td>Sing</td><td>King</td><td>Wing</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Lamp</td><td>Camp</td><td>Damp</td><td>Stamp</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Sock</td><td>Rock</td><td>Lock</td><td>Clock</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Cake</td><td>Make</td><td>Take</td><td>Bake</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Bell</td><td>Tell</td><td>Fell</td><td>Sell</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Road</td><td>Toad</td><td>Load</td><td>Mode</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Snow</td><td>Go</td><td>Show</td><td>Blow</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Plane</td><td>Crane</td><td>Train</td><td>Brain</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Toy</td><td>Boy</td><td>Joy</td><td>Coy</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Milk</td><td>Silk</td><td>Kilt</td><td>Wilt</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Sand</td><td>Hand</td><td>Land</td><td>Band</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Frog</td><td>Log</td><td>Jog</td><td>Dog</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Brush</td><td>Rush</td><td>Crush</td><td>Blush</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Seed</td><td>Need</td><td>Feed</td><td>Read</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Clock</td><td>Block</td><td>Rock</td><td>Shock</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Ship</td><td>Lip</td><td>Dip</td><td>Tip</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Fire</td><td>Wire</td><td>Tire</td><td>Hire</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+<tr>
+  <td>Hat</td><td>Cat</td><td>Bat</td><td>Rat</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Pen</td><td>Hen</td><td>Ten</td><td>Men</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Sun</td><td>Fun</td><td>Run</td><td>Bun</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Box</td><td>Fox</td><td>Ox</td><td>Socks</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Bed</td><td>Red</td><td>Fed</td><td>Said</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Map</td><td>Cap</td><td>Tap</td><td>Lap</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Car</td><td>Far</td><td>Jar</td><td>Star</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Moon</td><td>Spoon</td><td>Tune</td><td>June</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Bee</td><td>Tree</td><td>See</td><td>Free</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Hill</td><td>Fill</td><td>Will</td><td>Mill</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Boat</td><td>Goat</td><td>Coat</td><td>Float</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Leaf</td><td>Beef</td><td>Chief</td><td>Thief</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Door</td><td>Floor</td><td>More</td><td>Roar</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Light</td><td>Night</td><td>Fight</td><td>Bright</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Rain</td><td>Pain</td><td>Main</td><td>Train</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Ball</td><td>Call</td><td>Tall</td><td>Wall</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Duck</td><td>Luck</td><td>Truck</td><td>Stuck</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Pie</td><td>Fly</td><td>Try</td><td>Cry</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Cool</td><td>School</td><td>Pool</td><td>Tool</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Ship</td><td>Trip</td><td>Flip</td><td>Skip</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+<tr>
+  <td>Fan</td><td>Man</td><td>Can</td><td>Pan</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Zip</td><td>Dip</td><td>Hip</td><td>Lip</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Bug</td><td>Hug</td><td>Mug</td><td>Rug</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Net</td><td>Pet</td><td>Wet</td><td>Let</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Jam</td><td>Ham</td><td>Ram</td><td>Yam</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Log</td><td>Dog</td><td>Frog</td><td>Jog</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Bed</td><td>Led</td><td>Sled</td><td>Fed</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Key</td><td>Bee</td><td>See</td><td>Me</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Fox</td><td>Box</td><td>Rocks</td><td>Socks</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Hill</td><td>Bill</td><td>Pill</td><td>Chill</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Cap</td><td>Map</td><td>Nap</td><td>Lap</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Boat</td><td>Moat</td><td>Coat</td><td>Float</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Gold</td><td>Cold</td><td>Bold</td><td>Old</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Star</td><td>Car</td><td>Jar</td><td>Far</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Tree</td><td>Free</td><td>Bee</td><td>See</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Fish</td><td>Dish</td><td>Wish</td><td>Swish</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Bug</td><td>Jug</td><td>Mug</td><td>Hug</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Pie</td><td>Sky</td><td>Fly</td><td>Try</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Cool</td><td>Fool</td><td>Pool</td><td>Tool</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+<tr>
+  <td>Ship</td><td>Skip</td><td>Flip</td><td>Clip</td>
+  <td><button onclick="speakRow(this)">🔊</button></td>
+</tr>
+
+
+
+  </tbody>
+</table>
+<script>
+    function speakRow(button) {
+  const row = button.parentElement.parentElement;
+  const words = row.querySelectorAll("td");
+  
+  let sentence = "";
+  for (let i = 0; i < words.length - 1; i++) {
+    sentence += words[i].innerText + ", ";
+  }
+
+  let speech = new SpeechSynthesisUtterance(sentence);
+  speech.lang = "en-US";
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(speech);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            height: 100vh;
+            width: 100%;
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to bottom right,white 20%,pink);
+        }
+        .d1{
+            display: flex;
+            /* border: 2px solid red; */
+        }
+        #c1{
+            margin-top: 1.5%;
+            /* border: 2px solid rgb(50, 19, 175); */
+            width: 100%;
+            padding: 10px;
+        }
+        #c2{
+            /* border: 2px solid black; */
+            height: 180px;
+            width: 180px;
+        }
+        #c2 img{
+            height: 180px;
+            width: 180px;
+        }
+        hr{
+            margin-top: 10px;
+        }
+        .p1{
+            border: 2px solid black;
+            border-radius: 100%;
+            height: 65px;
+            width: 45%;
+            background-color: beige;
+            margin-top: 20px;
+            color: black;
+            font-size: 3rem;
+            font-weight: bolder;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            opacity: 0;
+            letter-spacing: 2px;
+            transform: translateY(40px) scale(0.95);
+            filter: blur(8px);
+            animation: pop 1s ease-out forwards;
+            animation-delay: 1s;
+        }
+        @keyframes pop {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+                filter: blur(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+        #k1{
+            width: 60%;
+        }
+        .alphabet-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            /* max-width: 600px; */
+            justify-content: center;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .letter {
+            width: 6.9%;
+            height: 122px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            transform-style: preserve-3d;
+            transition: transform 1s;
+            /* backface-visibility: hidden; */
+            /* transform: rotateY(180deg); */
+        }
+
+        .letter:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: #dbeafe;
+            transform: rotateY(180deg)
+
+        }
+        .letter-front,
+        .letter-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            backface-visibility: hidden;
+        }
+        .letter-front {
+            background: white;
+        }
+
+        /* back */
+        .letter-back {
+            background: #dbeafe;
+            transform: rotateY(180deg);
+        }
+
+        .letter-back img {
+            width: 80%;
+            height: auto;
+        }
+        b{
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: x-large;
+        }
+    </style>
+</head>
+<body>
+    <div class="d1">
+        <div id="c2"><img src="{{url_for('static',filename='images/10.png')}}" alt="cartoon"></div>
+        <div id="c1">
+             {% if session.get('name')  %}
+            Welcome, <b>Name:{{ session['name'] }} | Phone No:{{ session.get('pno', 'N/A') }} |
+            Email-ID: {{ session.get('email', 'N/A') }}</b>
+            {% else %}
+            Welcome, Guest
+            {% endif %}
+            <hr>
+            <center><h1 class="p1">HINDI VERNMALA</h1></center>
+            <center><hr id="k1"></center>
+        </div>
+    </div>
+    <div class="alphabet-container">
+            <div class="letter">
+                <div class="letter-front">अ</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/37.png')}}" alt="Apple">
+                 </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">आ</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/38.png')}}" alt="Apple">
+                 </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">इ</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/39.png')}}" alt="Apple">
+                 </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ई</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/40.png')}}" alt="Apple">
+                 </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">उ</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/41.png')}}" alt="Apple">
+                 </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ऊ</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/42.png')}}" alt="Fish">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ऋ</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/43.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ए</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/44.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ऐ</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/45.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ओ</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/46.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">औ</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/47.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">अं</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/48.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">अः</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/49.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">क</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/50.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ख</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/51.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ग</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/52.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">घ</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/53.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ङ</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/54.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">च</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/55.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">छ</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/56.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ज</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/57.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">झ</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/58.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ञ</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/59.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ट</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/60.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ठ</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/61.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ड</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/62.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ढ</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/63.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ण</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/64.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">त</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/65.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">थ</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/66.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">द</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/67.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ध</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/68.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">न</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/69.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">प</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/70.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">फ</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/71.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ब</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/72.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">भ</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/73.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">म</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/74.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">य</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/75.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">र</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/76.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ल</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/77.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">व</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/78.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">श</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/79.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ष</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/80.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">स</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/81.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ह</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/82.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">क्ष</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/83.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">त्र</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/84.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">ज्ञ</div>
+                <div class="letter-back">
+                    <img src="{{url_for('static',filename='images/85.png')}}" alt="Grapes">
+                </div>
+            </div>
+        </div>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            height: 100vh;
+            width: 100%;
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to bottom right,white 20%,pink);
+        }
+        .container {
+            display: flex;
+            border: 2px solid black;
+            height: 100%;
+        }
+        .side-nav {
+            width: 220px;
+            height: calc(100vh - 8px);
+            background-color: palevioletred;
+            position: fixed;
+            top: 3px;
+            left: 0;
+        }
+
+        .side-nav ul {
+            list-style: none;
+        }
+
+        .side-nav ul li a {
+            display: block;
+            color: black;
+            padding: 25px;
+            text-decoration: none;
+            font-weight: bolder;
+        }
+
+        .side-nav ul li a:hover {
+            background-color: darkgray;
+        }
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid black;
+        }
+        h1{
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        h2{
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        .c1{
+            border: 2px solid black;
+            background-color: beige;
+            width: 80%;
+            height: 105%;
+        }
+        .t1{
+            display: flex;
+            padding: 12px;
+        }
+        .t2{
+            margin-left: 20px;
+        }
+        #i8{
+            height: 23%;
+        }
+      
+        button{
+             width: 60px;
+        }
+        #i5{
+            /* border: 2px solid red; */
+            display: flex;
+            height: 30%;
+        }
+        #i7{
+            margin-left: 35%;
+        }
+        #pag1{
+                height: 150px;
+                width: 250px;
+                border: 2px solid black;
+                background-color: beige;
+                display: inline-block;
+                /* margin-top: 8%; */
+                margin-left: 57%;
+            }
+            #pag2{
+                height: 150px;
+                width: 250px;
+                border: 2px solid black;
+                background-color: beige;
+                display: inline-block;
+                /* margin-top: 7%; */
+            }
+            #o1{
+                font-size: 350%;
+                font-weight: bold;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            }
+            #o2{
+                font-size: 250%;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            }
+            #popup-text{
+                border: 2px solid black;
+                border-radius: 100%;
+                width: 50%;
+                background-color: beige;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                color: black;
+                font-size: 3rem;
+                font-weight: bolder;
+                opacity: 0;
+                letter-spacing: 2px;
+                transform: translateY(40px) scale(0.95);
+                filter: blur(8px);
+                animation: pop 1s ease-out forwards;
+                animation-delay: 1s;
+            }
+                @keyframes pop{
+                from {
+                    opacity: 0;
+                    transform: translateY(40px) scale(0.95);
+                    filter: blur(8px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                    filter: blur(0);
+                }
+            }
+    </style>
+</head>
+<body >
+    <div class="container">
+        
+        <!-- Vertical Sidebar -->
+        <nav class="side-nav">
+            <ul>
+                <center><li><a href="{{url_for('num')}}">Numbers</a></li>
+                <li><a href="{{url_for('hindi')}}">Hindi Varnmala</a></li>
+                <li><a href="{{url_for('alpha')}}">Alphabet</a></li>
+                <li><a href="{{url_for('cross')}}">Cross Word</a></li>
+                <li><a href="{{url_for('rhym')}}">Rhyming Words</a></li>
+                <li><a href="{{url_for('paint')}}">Paint and Fun</a></li>
+                <li><a href="{{url_for('tech')}}">Tech Parts</a></li>
+                <li><a href="{{url_for('poem')}}">Poem House</a></li>
+                <li><a href="{{url_for('logout')}}">Logout</a></li>
+                <li><a href="#">Coming Soon</a></li></center>
+            </ul>
+        </nav>
+        <main class="content">
+            <center><h1>FUN AND LEARN</h1></center>
+            <hr><br>
+            <div id="i5">
+            <form class="c1" action="{{url_for('submit')}} " method="post">
+                    <center><h2>Personal Details</h2></center>
+                    <hr>
+                    <div class="t1"><Label>Name:</Label>
+                    <input type="text" name="name"><br>
+                    <Label class="t2">Phone Number:</Label>
+                    <input type="text" name="pno"><br></div>
+                    <div class="t1"><Label>Email Id:</Label>
+                    <input type="text" name="email"><br>
+                    <Label class="t2">City or State:</Label>
+                    <input type="text" name="city"><br></div>
+                    <div class="t1"><Label>Gender:</Label>
+                    <input type="radio" name="gender" value="Male">Male
+                    <input type="radio" name="gender" value="Female">Female</div>
+                    <div class="t1" id="i8"><button>Submitt</button></div>
+                    </form>
+            <div><img src="{{url_for('static',filename='images/10.png')}}" alt="cartoon" id="i7" width="38%"></div>
+            </div>
+            <div class="bot">
+            <Div class="div1" id="pag1">
+                <center><h4 class="a">OBJECTIVE</h4></center>
+                <hr id="h1"><br>
+                <p class="t">
+                    <center>
+                        Early learning <br>
+                        Brain Development <br>
+                        Tech Friendly <br>
+                        Ready to Go <br>
+                    </center>
+                </p>
+            </Div>
+            <Div class="div1" id="pag2">
+                <center><h4 class="a">SKILL DEVELOPMENT</h4></center>
+                <hr class="r1"><br>
+                <p class="t">
+                    <center>
+                        Vocabulary <br>
+                        Brain Stroming <br>
+                        Tech-Part Knowledge <br>
+                        Ready to Go <br>
+                    </center>
+                </p>
+            </Div>
+            </div>
+            <p id="o1">“Big Fun for Little Learners!”</p>
+            <p id="o2"> Learning becomes an exciting adventure filled with play, colors, and discovery.</p>
+             <center><div id="popup-text">ArE YoU ReAdY !!</div></center>
+        </main>
+
+    </div>
+
+</body>
+</html>

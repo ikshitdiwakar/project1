@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Poem Player</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(#dff3ff,#b3e5fc);
+  font-family:'Comic Sans MS', cursive;
+}
+
+.container{
+  width:85%;
+  max-width:900px;
+  display:flex;
+  gap:20px;
+  background:#ffffff;
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 15px 30px rgba(0,0,0,0.25);
+}
+
+.poem-box{
+  flex:1;
+  background:#fff7e6;
+  border-radius:15px;
+  padding:20px;
+}
+
+.poem-box h2{
+  text-align:center;
+  color:#ff6f00;
+}
+
+.poem{
+  font-size:18px;
+  line-height:1.8;
+  margin-top:15px;
+}
+
+.buttons{
+  text-align:center;
+  margin-top:20px;
+}
+
+button{
+  padding:10px 18px;
+  margin:5px;
+  border:none;
+  border-radius:20px;
+  font-size:16px;
+  cursor:pointer;
+  background:#ff9800;
+  color:white;
+  transition:0.3s;
+}
+
+button:hover{
+  background:#f57c00;
+}
+
+.image-box{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.image-box img{
+  max-width:100%;
+  max-height:300px;
+  border-radius:20px;
+  box-shadow:0 10px 20px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- Poem Section -->
+  <div class="poem-box">
+    <h2 id="poemTitle">Twinkle Twinkle</h2>
+
+    <div class="poem" id="poemText">
+      Twinkle, twinkle, little star,<br>
+      How I wonder what you are!<br>
+      Up above the world so high,<br>
+      Like a diamond in the sky.
+    </div>
+
+    <div class="buttons">
+      <button onclick="playPoem()">Play Poem</button>
+      <button onclick="changePoem()">Change Poem</button>
+    </div>
+
+    <!-- Audio Player -->
+    <audio id="audioPlayer"></audio>
+  </div>
+
+  <!-- Image Section -->
+  <div class="image-box">
+    <img id="poemImage" src="https://cdn-icons-png.flaticon.com/512/616/616554.png">
+  </div>
+
+</div>
+
+<script>
+let index = 0;
+
+const poems = [
+  {
+    title: "Twinkle Twinkle",
+    text: `Twinkle, twinkle, little star,
+How I wonder what you are!
+Up above the world so high,
+Like a diamond in the sky.`,
+    img: "https://cdn-icons-png.flaticon.com/512/616/616554.png",
+    audio: "twinkle.mp3"
+  },
+  {
+    title: "Rain Rain",
+    text: `Rain, rain, go away,
+Come again another day.
+Little children want to play,
+Rain, rain, go away.`,
+    img: "https://cdn-icons-png.flaticon.com/512/414/414927.png",
+    audio: "rain.mp3"
+  },
+  {
+    title: "Baa Baa Black Sheep",
+    text: `Baa, baa, black sheep,
+Have you any wool?
+Yes sir, yes sir,
+Three bags full.`,
+    img: "https://cdn-icons-png.flaticon.com/512/616/616408.png",
+    audio: "sheep.mp3"
+  }
+];
+
+function playPoem(){
+  const audio = document.getElementById("audioPlayer");
+  audio.src = poems[index].audio;
+  audio.play();
+}
+
+function changePoem(){
+  index = (index + 1) % poems.length;
+
+  document.getElementById("poemTitle").innerText = poems[index].title;
+  document.getElementById("poemText").innerHTML =
+    poems[index].text.replaceAll("\n","<br>");
+  document.getElementById("poemImage").src = poems[index].img;
+
+  document.getElementById("audioPlayer").pause();
+}
+</script>
+
+</body>
+</html>

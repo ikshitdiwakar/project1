@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            height: 100vh;
+            width: 100%;
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to bottom right,white 20%,pink);
+        }
+        .d1{
+            display: flex;
+            /* border: 2px solid red; */
+        }
+        #c1{
+            margin-top: 1.5%;
+            /* border: 2px solid rgb(50, 19, 175); */
+            width: 100%;
+            padding: 10px;
+        }
+        #c2{
+            /* border: 2px solid black; */
+            height: 180px;
+            width: 180px;
+        }
+        #c2 img{
+            height: 180px;
+            width: 180px;
+        }
+        hr{
+            margin-top: 10px;
+        }
+        .p1{
+            border: 2px solid black;
+            border-radius: 100%;
+            height: 65px;
+            width: 28%;
+            background-color: beige;
+            margin-top: 20px;
+            color: black;
+            font-size: 3rem;
+            font-weight: bolder;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            opacity: 0;
+            letter-spacing: 2px;
+            transform: translateY(40px) scale(0.95);
+            filter: blur(8px);
+            animation: pop 1s ease-out forwards;
+            animation-delay: 1s;
+        }
+        @keyframes pop {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+                filter: blur(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+        #k1{
+            width: 40%;
+        }
+        .alphabet-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            /* max-width: 600px; */
+            justify-content: center;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .letter {
+            width: 8.5%;
+            height: 125px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            transform-style: preserve-3d;
+            transition: transform 1s;
+            /* backface-visibility: hidden; */
+            /* transform: rotateY(180deg); */
+        }
+
+        .letter:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: #dbeafe;
+            transform: rotateY(180deg)
+
+        }
+        .letter-front{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            backface-visibility: hidden;
+        }
+        .letter-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            backface-visibility: hidden;
+            color: red;
+        }
+        .letter-front {
+            background: white;
+        }
+
+        /* back */
+        .letter-back {
+            background: #dbeafe;
+            transform: rotateY(180deg);
+        }
+
+        .letter-back img {
+            width: 80%;
+            height: auto;
+        }
+        b{
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: x-large;
+        }
+    </style>
+</head>
+<body>
+    <div class="d1">
+        <div id="c2"><img src="{{url_for('static',filename='images/10.png')}}" alt="cartoon"></div>
+        <div id="c1">
+             {% if session.get('name')  %}
+            Welcome, <b>Name:{{ session['name'] }} | Phone No:{{ session.get('pno', 'N/A') }} |
+            Email-ID: {{ session.get('email', 'N/A') }}</b>
+            {% else %}
+            Welcome, Guest
+            {% endif %}
+            <hr>
+            <center><h1 class="p1">NUMBERS</h1></center>
+            <center><hr id="k1"></center>
+        </div>
+    </div>
+    <center><div class="alphabet-container">
+            <div class="letter">
+                <div class="letter-front">1</div>
+                <div class="letter-back" onmouseenter="speak1()">
+                    <p>ONE</p>
+                 </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">2</div>
+                <div class="letter-back" onmouseenter="speak2()">
+                    <p>TWO</p>
+                 </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">3</div>
+                <div class="letter-back" onmouseenter="speak3()">
+                    <p>THREE</p>
+                 </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">4</div>
+                <div class="letter-back" onmouseenter="speak4()">
+                    <p>FOUR</p>
+                 </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">5</div>
+                <div class="letter-back" onmouseenter="speak5()">
+                    <p>FIVE</p>
+                 </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">6</div>
+                <div class="letter-back" onmouseenter="speak6()">
+                    <p>SIX</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">7</div>
+                <div class="letter-back" onmouseenter="speak7()">
+                    <p>SEVEN</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">8</div>
+                <div class="letter-back" onmouseenter="speak8()">
+                    <p>EIGHT</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">9</div>
+                <div class="letter-back" onmouseenter="speak9()">
+                    <p>NINE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">10</div>
+                <div class="letter-back" onmouseenter="speak10()">
+                    <p>TEN</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">11</div>
+                <div class="letter-back" onmouseenter="speak11()">
+                    <p>ELEVEN</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">12</div>
+                <div class="letter-back" onmouseenter="speak12()">
+                    <p>TWELVE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">13</div>
+                <div class="letter-back" onmouseenter="speak13()">
+                    <p>THIRTEEN</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">14</div>
+                <div class="letter-back" onmouseenter="speak14()">
+                    <p>FOURTEEN</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">15</div>
+                <div class="letter-back" onmouseenter="speak15()">
+                    <p>FIFTEEN</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">16</div>
+                <div class="letter-back" onmouseenter="speak16()">
+                    <p>SIXTEEN</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">17</div>
+                <div class="letter-back" onmouseenter="speak17()">
+                    <p>SEVENTEEN</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">18</div>
+                <div class="letter-back" onmouseenter="speak18()">
+                    <p>EIGHTEEN</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">19</div>
+                <div class="letter-back" onmouseenter="speak19()">
+                    <p>NINETEEN</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">20</div>
+                <div class="letter-back" onmouseenter="speak20()">
+                    <p>TWENTY</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">21</div>
+                <div class="letter-back" onmouseenter="speak21()">
+                    <p>TWENTY ONE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">22</div>
+                <div class="letter-back" onmouseenter="speak22()">
+                    <p>TWENTY TWO</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">23</div>
+                <div class="letter-back" onmouseenter="speak23()">
+                    <p>TWENTY THREE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">24</div>
+                <div class="letter-back" onmouseenter="speak24()">
+                    <p>TWENTY FOUR</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">25</div>
+                <div class="letter-back" onmouseenter="speak25()">
+                    <p>TWENTY FIVE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">26</div>
+                <div class="letter-back" onmouseenter="speak26()">
+                    <p>TWENTY SIX</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">27</div>
+                <div class="letter-back" onmouseenter="speak27()">
+                    <p>TWENTY SEVEN</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">28</div>
+                <div class="letter-back" onmouseenter="speak28()">
+                    <p>TWENTY EIGHT</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">29</div>
+                <div class="letter-back" onmouseenter="speak29()">
+                    <p>TWENTY NINE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">30</div>
+                <div class="letter-back" onmouseenter="speak30()">
+                    <p>THIRTY</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">31</div>
+                <div class="letter-back" onmouseenter="speak31()">
+                    <p>THIRTY ONE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">32</div>
+                <div class="letter-back" onmouseenter="speak32()">
+                    <p>THIRTY TWO</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">33</div>
+                <div class="letter-back" onmouseenter="speak33()">
+                    <p>THIRTY THREE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">34</div>
+                <div class="letter-back" onmouseenter="speak34()">
+                    <p>THIRTY FOUR</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">35</div>
+                <div class="letter-back" onmouseenter="speak35()">
+                    <p>THIRTY FIVE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">36</div>
+                <div class="letter-back" onmouseenter="speak36()">
+                    <p>THIRTY SIX</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">37</div>
+                <div class="letter-back" onmouseenter="speak37()">
+                    <p>THIRTY SEVEN</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">38</div>
+                <div class="letter-back" onmouseenter="speak38()">
+                    <p>THIRTY EIGHT</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">39</div>
+                <div class="letter-back" onmouseenter="speak39()">
+                    <p>THIRTY NINE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">40</div>
+                <div class="letter-back" onmouseenter="speak40()">
+                    <p>FORTY</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">41</div>
+                <div class="letter-back" onmouseenter="speak41()">
+                    <p>FORTY ONE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">42</div>
+                <div class="letter-back" onmouseenter="speak42()">
+                    <p>FORTY TWO</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">43</div>
+                <div class="letter-back" onmouseenter="speak43()">
+                    <p>FORTY THREE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">44</div>
+                <div class="letter-back" onmouseenter="speak44()">
+                    <p>FORTY FOUR</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">45</div>
+                <div class="letter-back" onmouseenter="speak45()">
+                    <p>FORTY FIVE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">46</div>
+                <div class="letter-back" onmouseenter="speak46()">
+                    <p>FORTY SIX</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">47</div>
+                <div class="letter-back" onmouseenter="speak47()">
+                    <p>FORTY SEVEN</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">48</div>
+                <div class="letter-back" onmouseenter="speak48()">
+                    <p>FORTY EIGHT</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">49</div>
+                <div class="letter-back" onmouseenter="speak49()">
+                    <p>FORTY NINE</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">50</div>
+                <div class="letter-back" onmouseenter="speak50()">
+                    <p>FIFTY</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">51</div>
+                <div class="letter-back" onmouseenter="speak51()">
+                    <p>FIFTY ONE</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">52</div>
+                <div class="letter-back" onmouseenter="speak52()">
+                    <p>FIFTY TWO</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">53</div>
+                <div class="letter-back" onmouseenter="speak53()">
+                    <p>FIFTY THREE</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">54</div>
+                <div class="letter-back" onmouseenter="speak54()">
+                    <p>FIFTY FOUR</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">55</div>
+                <div class="letter-back" onmouseenter="speak55()">
+                    <p>FIFTY FIVE</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">56</div>
+                <div class="letter-back" onmouseenter="speak56()">
+                    <p>FIFTY SIX</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">57</div>
+                <div class="letter-back" onmouseenter="speak57()">
+                    <p>FIFTY SEVEN</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">58</div>
+                <div class="letter-back" onmouseenter="speak58()">
+                    <p>FIFTY EIGHT</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">59</div>
+                <div class="letter-back" onmouseenter="speak59()">
+                    <p>FIFTY NINE</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">60</div>
+                <div class="letter-back" onmouseenter="speak60()">
+                    <p>SIXTY</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">61</div>
+                <div class="letter-back" onmouseenter="speak61()">
+                    <p>SIXTY ONE</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">62</div>
+                <div class="letter-back" onmouseenter="speak62()">
+                    <p>SIXTY TWO</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">63</div>
+                <div class="letter-back" onmouseenter="speak63()">
+                    <p>SIXTY THREE</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">64</div>
+                <div class="letter-back" onmouseenter="speak64()">
+                    <p>SIXTY FOUR</p>  
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">65</div>
+                <div class="letter-back" onmouseenter="speak65()">
+                    <p>SIXTY FIVE</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">66</div>
+                <div class="letter-back" onmouseenter="speak66()">
+                    <p>SIXTY SIX</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">67</div>
+                <div class="letter-back" onmouseenter="speak67()">
+                    <p>SIXTY SEVEN</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">68</div>
+                <div class="letter-back" onmouseenter="speak68()">
+                    <p>SIXTY EIGHT</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">69</div>
+                <div class="letter-back" onmouseenter="speak69()">
+                    <p>SIXTY NINE</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">70</div>
+                <div class="letter-back" onmouseenter="speak70()">
+                    <p>SEVENTY</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">71</div>
+                <div class="letter-back" onmouseenter="speak71()">
+                    <p>SEVENTY ONE</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">72</div>
+                <div class="letter-back" onmouseenter="speak72()">
+                    <p>SEVENTY TWO</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">73</div>
+                <div class="letter-back" onmouseenter="speak73()">
+                    <p>SEVENTY THREE</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">74</div>
+                <div class="letter-back" onmouseenter="speak74()">
+                    <p>SEVENTY FOUR</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">75</div>
+                <div class="letter-back" onmouseenter="speak75()">
+                    <p>SEVENTY FIVE</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">76</div>
+                <div class="letter-back" onmouseenter="speak76()">
+                    <p>SEVENTY SIX</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">77</div>
+                <div class="letter-back" onmouseenter="speak77()">
+                    <p>SEVENTY SEVEN</p>
+                </div>
+            </div>
+             <div class="letter">
+                <div class="letter-front">78</div>
+                <div class="letter-back"  onmouseenter="speak78()">
+                    <p>SEVENTY EIGHT</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">79</div>
+                <div class="letter-back" onmouseenter="speak79()">
+                    <p>SEVENTY NINE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">80</div>
+                <div class="letter-back" onmouseenter="speak80()">
+                    <p>EIGHTY</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">81</div>
+                <div class="letter-back" onmouseenter="speak81()">
+                    <p>EIGHTY ONE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">82</div>
+                <div class="letter-back" onmouseenter="speak82()">
+                    <p>EIGHTY TWO</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">83</div>
+                <div class="letter-back" onmouseenter="speak83()">
+                    <p>EIGHTY THREE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">84</div>
+                <div class="letter-back" onmouseenter="speak84()">
+                    <p>EIGHTY FOUR</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">85</div>
+                <div class="letter-back" onmouseenter="speak85()">
+                    <p>EIGHTY FIVE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">86</div>
+                <div class="letter-back" onmouseenter="speak86()">
+                    <p>EIGHTY SIX</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">87</div>
+                <div class="letter-back" onmouseenter="speak87()">
+                    <p>EIGHTY SEVEN</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">88</div>
+                <div class="letter-back" onmouseenter="speak88()">
+                    <p>EIGHTY EIGHT</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">89</div>
+                <div class="letter-back" onmouseenter="speak89()">
+                    <p>EIGHTY NINE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">90</div>
+                <div class="letter-back" onmouseenter="speak90()">
+                    <p>NINETY</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">91</div>
+                <div class="letter-back" onmouseenter="speak91()">
+                    <p>NINETY ONE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">92</div>
+                <div class="letter-back" onmouseenter="speak92()">
+                    <p>NINETY TWO</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">93</div>
+                <div class="letter-back"  onmouseenter="speak93()">
+                    <p>NINETY THREE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">94</div>
+                <div class="letter-back" onmouseenter="speak94()">
+                    <p>NINETY FOUR</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">95</div>
+                <div class="letter-back" onmouseenter="speak95()">
+                    <p>NINETY FIVE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">96</div>
+                <div class="letter-back" onmouseenter="speak96()">
+                    <p>NINETY SIX</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">97</div>
+                <div class="letter-back" onmouseenter="speak97()">
+                    <p>NINETY SEVEN</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">98</div>
+                <div class="letter-back" onmouseenter="speak98()">
+                    <p>NINETY EIGHT</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">99</div>
+                <div class="letter-back" onmouseenter="speak99()">
+                    <p>NINETY NINE</p>
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">100</div>
+                <div class="letter-back" onmouseenter="speak100()">
+                    <p> ONE HUNDRED</p>
+                </div>
+            </div>
+        </div></center>
+        <script>
+            function speak1() {
+            let text = new
+            SpeechSynthesisUtterance("ONE");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speak2() {
+            let text = new
+            SpeechSynthesisUtterance("TWO");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speak3() {
+            let text = new
+            SpeechSynthesisUtterance("THREE");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speak4() {
+            let text = new
+            SpeechSynthesisUtterance("FOUR");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speak5() {
+            let text = new
+            SpeechSynthesisUtterance("FIVE");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speak6() {
+            let text = new
+            SpeechSynthesisUtterance("SIX");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speak7() {
+            let text = new
+            SpeechSynthesisUtterance("SEVEN");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speak8() {
+            let text = new
+            SpeechSynthesisUtterance("EIGHT");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speak9() {
+            let text = new
+            SpeechSynthesisUtterance("NINE");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speak10() {
+            let text = new
+            SpeechSynthesisUtterance("TEN");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speak11() {
+                let text = new 
+                SpeechSynthesisUtterance("ELEVEN");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak12() {
+                let text = new SpeechSynthesisUtterance("TWELVE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak13() {
+                let text = new SpeechSynthesisUtterance("THIRTEEN");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak14() {
+                let text = new SpeechSynthesisUtterance("FOURTEEN");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak15() {
+                let text = new SpeechSynthesisUtterance("FIFTEEN");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak16() {
+                let text = new SpeechSynthesisUtterance("SIXTEEN");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak17() {
+                let text = new SpeechSynthesisUtterance("SEVENTEEN");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak18() {
+                let text = new SpeechSynthesisUtterance("EIGHTEEN");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak19() {
+                let text = new SpeechSynthesisUtterance("NINETEEN");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak20() {
+                let text = new SpeechSynthesisUtterance("TWENTY");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            /* -------- TENS -------- */
+
+            function speak21() {
+                let text = new SpeechSynthesisUtterance("TWENTY ONE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak22() {
+                let text = new SpeechSynthesisUtterance("TWENTY TWO");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak23() {
+                let text = new SpeechSynthesisUtterance("TWENTY THREE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+            function speak24() {
+                let text = new SpeechSynthesisUtterance("TWENTY FOUR");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak25() {
+                let text = new SpeechSynthesisUtterance("TWENTY FIVE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak26() {
+                let text = new SpeechSynthesisUtterance("TWENTY SIX");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak27() {
+                let text = new SpeechSynthesisUtterance("TWENTY SEVEN");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak28() {
+                let text = new SpeechSynthesisUtterance("TWENTY EIGHT");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak29() {
+                let text = new SpeechSynthesisUtterance("TWENTY NINE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+            function speak30() {
+                let text = new SpeechSynthesisUtterance("THIRTY");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+            function speak31() {
+                let text = new SpeechSynthesisUtterance("THIRTY ONE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak32() {
+                let text = new SpeechSynthesisUtterance("THIRTY TWO");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak33() {
+                let text = new SpeechSynthesisUtterance("THIRTY THREE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak34() {
+                let text = new SpeechSynthesisUtterance("THIRTY FOUR");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak35() {
+                let text = new SpeechSynthesisUtterance("THIRTY FIVE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak36() {
+                let text = new SpeechSynthesisUtterance("THIRTY SIX");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak37() {
+                let text = new SpeechSynthesisUtterance("THIRTY SEVEN");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak38() {
+                let text = new SpeechSynthesisUtterance("THIRTY EIGHT");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak39() {
+                let text = new SpeechSynthesisUtterance("THIRTY NINE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+            function speak40() {
+                let text = new SpeechSynthesisUtterance("FORTY");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+            function speak41() {
+                let text = new SpeechSynthesisUtterance("FORTY ONE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak42() {
+                let text = new SpeechSynthesisUtterance("FORTY TWO");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak43() {
+                let text = new SpeechSynthesisUtterance("FORTY THREE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak44() {
+                let text = new SpeechSynthesisUtterance("FORTY FOUR");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak45() {
+                let text = new SpeechSynthesisUtterance("FORTY FIVE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak46() {
+                let text = new SpeechSynthesisUtterance("FORTY SIX");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak47() {
+                let text = new SpeechSynthesisUtterance("FORTY SEVEN");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak48() {
+                let text = new SpeechSynthesisUtterance("FORTY EIGHT");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak49() {
+                let text = new SpeechSynthesisUtterance("FORTY NINE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak50() {
+                let text = new SpeechSynthesisUtterance("FIFTY");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+            function speak51() {
+                let text = new SpeechSynthesisUtterance("FIFTY ONE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak52() {
+                let text = new SpeechSynthesisUtterance("FIFTY TWO");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak53() {
+                let text = new SpeechSynthesisUtterance("FIFTY THREE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak54() {
+                let text = new SpeechSynthesisUtterance("FIFTY FOUR");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak55() {
+                let text = new SpeechSynthesisUtterance("FIFTY FIVE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak56() {
+                let text = new SpeechSynthesisUtterance("FIFTY SIX");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak57() {
+                let text = new SpeechSynthesisUtterance("FIFTY SEVEN");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak58() {
+                let text = new SpeechSynthesisUtterance("FIFTY EIGHT");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak59() {
+                let text = new SpeechSynthesisUtterance("FIFTY NINE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+            function speak60() {
+                let text = new SpeechSynthesisUtterance("SIXTY");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+            function speak61() {
+                let text = new SpeechSynthesisUtterance("SIXTY ONE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak62() {
+                let text = new SpeechSynthesisUtterance("SIXTY TWO");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak63() {
+                let text = new SpeechSynthesisUtterance("SIXTY THREE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak64() {
+                let text = new SpeechSynthesisUtterance("SIXTY FOUR");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak65() {
+                let text = new SpeechSynthesisUtterance("SIXTY FIVE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak66() {
+                let text = new SpeechSynthesisUtterance("SIXTY SIX");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak67() {
+                let text = new SpeechSynthesisUtterance("SIXTY SEVEN");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak68() {
+                let text = new SpeechSynthesisUtterance("SIXTY EIGHT");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak69() {
+                let text = new SpeechSynthesisUtterance("SIXTY NINE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak70() {
+                let text = new SpeechSynthesisUtterance("SEVENTY");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+            function speak71() {
+                let text = new SpeechSynthesisUtterance("SEVENTY ONE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak72() {
+                let text = new SpeechSynthesisUtterance("SEVENTY TWO");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak73() {
+                let text = new SpeechSynthesisUtterance("SEVENTY THREE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak74() {
+                let text = new SpeechSynthesisUtterance("SEVENTY FOUR");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak75() {
+                let text = new SpeechSynthesisUtterance("SEVENTY FIVE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak76() {
+                let text = new SpeechSynthesisUtterance("SEVENTY SIX");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak77() {
+                let text = new SpeechSynthesisUtterance("SEVENTY SEVEN");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak78() {
+                let text = new SpeechSynthesisUtterance("SEVENTY EIGHT");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak79() {
+                let text = new SpeechSynthesisUtterance("SEVENTY NINE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak80() {
+                let text = new SpeechSynthesisUtterance("EIGHTY");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+            function speak81() {
+                let text = new SpeechSynthesisUtterance("EIGHTY ONE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak82() {
+                let text = new SpeechSynthesisUtterance("EIGHTY TWO");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak83() {
+                let text = new SpeechSynthesisUtterance("EIGHTY THREE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak84() {
+                let text = new SpeechSynthesisUtterance("EIGHTY FOUR");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak85() {
+                let text = new SpeechSynthesisUtterance("EIGHTY FIVE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak86() {
+                let text = new SpeechSynthesisUtterance("EIGHTY SIX");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak87() {
+                let text = new SpeechSynthesisUtterance("EIGHTY SEVEN");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak88() {
+                let text = new SpeechSynthesisUtterance("EIGHTY EIGHT");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak89() {
+                let text = new SpeechSynthesisUtterance("EIGHTY NINE");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak90() {
+                let text = new SpeechSynthesisUtterance("NINETY");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+            function speak91() {
+                let text = new SpeechSynthesisUtterance("Ninety One");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak92() {
+                let text = new SpeechSynthesisUtterance("Ninety Two");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak93() {
+                let text = new SpeechSynthesisUtterance("Ninety Three");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak94() {
+                let text = new SpeechSynthesisUtterance("Ninety Four");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak95() {
+                let text = new SpeechSynthesisUtterance("Ninety Five");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak96() {
+                let text = new SpeechSynthesisUtterance("Ninety Six");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak97() {
+                let text = new SpeechSynthesisUtterance("Ninety Seven");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak98() {
+                let text = new SpeechSynthesisUtterance("Ninety Eight");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak99() {
+                let text = new SpeechSynthesisUtterance("Ninety Nine");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+            function speak100() {
+                let text = new SpeechSynthesisUtterance("ONE HUNDRED");
+                text.lang = "en-US";
+                window.speechSynthesis.speak(text);
+            }
+
+        </script>
+</body>
+</html>

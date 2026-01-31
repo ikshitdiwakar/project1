@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            height: 100vh;
+            width: 100%;
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to bottom right,white 20%,pink);
+        }
+        .d1{
+            display: flex;
+            /* border: 2px solid red; */
+        }
+        #c1{
+            margin-top: 1.5%;
+            /* border: 2px solid rgb(50, 19, 175); */
+            width: 100%;
+            padding: 10px;
+        }
+        #c2{
+            /* border: 2px solid black; */
+            height: 180px;
+            width: 180px;
+        }
+        #c2 img{
+            height: 180px;
+            width: 180px;
+        }
+        hr{
+            margin-top: 10px;
+        }
+        .p1{
+            border: 2px solid black;
+            border-radius: 100%;
+            height: 65px;
+            width: 28%;
+            background-color: beige;
+            margin-top: 10px;
+            color: black;
+            font-size: 3rem;
+            font-weight: bolder;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            opacity: 0;
+            letter-spacing: 2px;
+            transform: translateY(40px) scale(0.95);
+            filter: blur(8px);
+            animation: pop 1s ease-out forwards;
+            animation-delay: 1s;
+        }
+        @keyframes pop {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+                filter: blur(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+        #k1{
+            width: 35%;
+        }
+        .learning-area {
+        width: 1000px;
+        height: 300px;
+        background: linear-gradient(#fff4c2, #ffe082);
+        border-radius: 30px;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        position: relative;
+        text-align: center;
+        margin-left: 18%;
+        /* margin-bottom: 5%; */
+        }
+
+        h1 {
+        margin: 10px;
+        color: #ff6f00;
+        }
+
+        /* SCENE */
+        .scene {
+        position: relative;
+        width: 100%;
+        height: 480px;
+        background: linear-gradient(#cce7ff 60%, #8d6e63 60%);
+        border-radius: 0 0 30px 30px;
+        }
+
+        /* COMMON */
+        .part {
+        position: absolute;
+        cursor: pointer;
+        transition: transform 0.3s;
+        }
+
+        .part:hover {
+        transform: scale(1.08);
+        }
+
+        /* MONITOR */
+        .monitor {
+        top: 80px;
+        left: 390px;
+        width: 220px;
+        }
+
+        .screen {
+        height: 140px;
+        background: #5fd3ff;
+        border-radius: 25px;
+        border: 6px solid #333;
+        position: relative;
+        }
+
+        .eyes span {
+        width: 16px;
+        height: 16px;
+        background: black;
+        border-radius: 50%;
+        position: absolute;
+        top: 40px;
+        }
+
+        .eyes span:first-child { left: 70px; }
+        .eyes span:last-child { right: 70px; }
+
+        .smile {
+        width: 50px;
+        height: 25px;
+        border-bottom: 5px solid black;
+        border-radius: 0 0 50px 50px;
+        position: absolute;
+        bottom: 35px;
+        left: 85px;
+        }
+
+        .stand {
+        width: 70px;
+        height: 30px;
+        background: #555;
+        margin: auto;
+        border-radius: 12px;
+        }
+
+        /* CPU */
+        .cpu {
+        top: 260px;
+        left: 430px;
+        width: 140px;
+        height: 140px;
+        background: #ffd166;
+        border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        .cpu span {
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        font-weight: bold;
+        }
+
+        .power {
+        width: 14px;
+        height: 14px;
+        background: limegreen;
+        border-radius: 50%;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        }
+
+        .vent {
+        width: 80%;
+        height: 6px;
+        background: #333;
+        margin: 10px auto;
+        border-radius: 5px;
+        }
+
+        /* KEYBOARD */
+        .keyboard {
+        bottom: 30px;
+        left: 300px;
+        width: 400px;
+        height: 80px;
+        background: #ffb703;
+        border-radius: 18px;
+        }
+
+        .key-row {
+        margin: 10px;
+        height: 22px;
+        background: repeating-linear-gradient(
+            90deg,
+            #fff 0,
+            #fff 14px,
+            #ffb703 14px,
+            #ffb703 20px
+        );
+        border-radius: 8px;
+        }
+
+        /* MOUSE */
+        .mouse {
+        bottom: 90px;
+        right: 220px;
+        width: 60px;
+        height: 85px;
+        background: #ef476f;
+        border-radius: 50%;
+        }
+
+        .scroll {
+        width: 6px;
+        height: 15px;
+        background: #333;
+        border-radius: 6px;
+        margin: 10px auto;
+        }
+
+        .wire {
+        width: 100px;
+        height: 2px;
+        background: #333;
+        position: absolute;
+        top: -10px;
+        left: -80px;
+        }
+
+        /* SPEAKERS */
+        .speaker {
+        top: 88px;
+        width: 70px;
+        height: 200px;
+        background: #118ab2;
+        border-radius: 25px;
+        }
+
+        .speaker.left { left: 220px; }
+        .speaker.right { right: 220px; }
+
+        .ring {
+        width: 40px;
+        height: 40px;
+        border: 5px solid #fff;
+        border-radius: 50%;
+        margin: 80px auto;
+        }
+
+        /* POPUP */
+        .popup {
+        position: absolute;
+        background: #000;
+        color: #fff;
+        padding: 12px 16px;
+        border-radius: 15px;
+        font-size: 14px;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: 0.3s;
+        pointer-events: none;
+        }
+
+        .popup.show {
+        opacity: 1;
+        transform: translateY(0);
+        }
+        /* DEVICE SIDE PANELS */
+.device-panel {
+  position: absolute;
+  top:170px;
+  width: 230px;
+  height: 70%;
+  background: rgba(255,255,255,0.7);
+  border-radius: 20px;
+  padding: 15px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.left-panel {
+  left: 20px;
+}
+
+.right-panel {
+  right: 10px;
+}
+
+.device-panel h3 {
+  margin-top: 0;
+  color: #ff6f00;
+  font-size: 18px;
+}
+
+/* DEVICE ITEM */
+.device {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+  transition: transform 0.3s;
+}
+
+.device:hover {
+  transform: scale(1.1);
+}
+
+.device img {
+  width: 40px;
+  height: 40px;
+}
+
+.device span {
+  font-size: 14px;
+  font-weight: bold;
+}
+b{
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: x-large;
+        }
+
+        </style>
+    </head>
+    <body>
+        <div class="d1">
+            <div id="c2"><img src="{{url_for('static',filename='images/10.png')}}" alt="cartoon"></div>
+            <div id="c1">
+                 {% if session.get('name')  %}
+                Welcome, <b>Name:{{ session['name'] }} | Phone No:{{ session.get('pno', 'N/A') }} |
+                Email-ID: {{ session.get('email', 'N/A') }}</b>
+                {% else %}
+                Welcome, Guest
+                {% endif %}
+                <hr>
+                <center><h1 class="p1">TECH-PART</h1></center>
+                <center><hr id="k1"></center>
+            </div>
+        </div>
+        <div class="learning-area">
+
+    <h1>My Computer Friend</h1>
+
+    <div class="scene">
+
+        <!-- Left Speaker -->
+        <div class="speaker left part"
+        onmouseenter="showPopup(event,'Speaker','It makes sound')">
+        <div class="ring"></div>
+        </div>
+
+        <!-- Monitor -->
+        <div class="monitor part"
+        onmouseenter="showPopup(event,'Monitor','It shows pictures and videos')">
+        <div class="screen">
+            <div class="eyes">
+            <span></span><span></span>
+            </div>
+            <div class="smile"></div>
+        </div>
+        <div class="stand"></div>
+        </div>
+
+        <!-- Right Speaker -->
+        <div class="speaker right part"
+        onmouseenter="showPopup(event,'Speaker','It makes sound')">
+        <div class="ring"></div>
+        </div>
+
+        <!-- CPU -->
+        <div class="cpu part"
+        onmouseenter="showPopup(event,'CPU','It is the brain of computer')">
+        <div class="power"></div>
+        <div class="vent"></div>
+        <div class="vent"></div>
+        <span>CPU</span>
+        </div>
+
+        <!-- Keyboard -->
+        <div class="keyboard part"
+        onmouseenter="showPopup(event,'Keyboard','Used for typing')">
+        <div class="key-row"></div>
+        <div class="key-row"></div>
+        </div>
+
+        <!-- Mouse -->
+        <div class="mouse part"
+        onmouseenter="showPopup(event,'Mouse','Used to click and move')">
+        <div class="scroll"></div>
+        <div class="wire"></div>
+        </div>
+        
+
+    </div>
+    </div>
+
+    <div id="popup" class="popup"></div>
+    <div class="device-panel left-panel">
+  <center><h3>Input Devices</h3></center>
+
+  <div class="device" onmouseenter="showPopup(event,'Keyboard','Used to type')">
+    <img src="{{url_for('static',filename='images/keyboard.jpg')}}">
+    <span>Keyboard</span>
+  </div>
+
+  <div class="device" onmouseenter="showPopup(event,'Mouse','Used to Click and Point')">
+    <img src="{{url_for('static',filename='images/mouse.png')}}">
+    <span>Mouse</span>
+  </div>
+
+  <div class="device" onmouseenter="showPopup(event,'Microphone','Used to input voice')">
+    <img src="{{url_for('static',filename='images/microphone.jpg')}}">
+    <span>Microphone</span>
+  </div>
+
+  <div class="device" onmouseenter="showPopup(event,'Scanner','Used to Scan the QR-code')">
+    <img src="{{url_for('static',filename='images/scanner.png')}}">
+    <span>Scanner</span>
+  </div>
+  <div class="device" onmouseenter="showPopup(event,'Joy-Stick','Used to give directional commond')">
+    <img src="{{url_for('static',filename='images/joy.jpg')}}">
+    <span>Joy-Stick</span>
+  </div>
+  <div class="device" onmouseenter="showPopup(event,'Light-pen','Used to hover over apps and icons')">
+    <img src="{{url_for('static',filename='images/pen.jpg')}}">
+    <span>Light-pen</span>
+  </div>
+  <div class="device" onmouseenter="showPopup(event,'Web-cam','Used to record')">
+    <img src="{{url_for('static',filename='images/cam.png')}}">
+    <span>Web-cam</span>
+  </div>
+  <div class="device" onmouseenter="showPopup(event,'Biometric device','Used to scan Biometrics')">
+    <img src="{{url_for('static',filename='images/bio.jpg')}}">
+    <span>Biometric device</span>
+  </div>
+</div>
+
+<!-- OUTPUT DEVICES -->
+<div class="device-panel right-panel">
+  <center><h3>Output Devices</h3></center>
+
+  <div class="device" onmouseenter="showPopup(event,'Monitor','Used to display Objects')">
+    <img src="{{url_for('static',filename='images/monitor.avif')}}">
+    <span>Monitor</span>
+  </div>
+
+  <div class="device" onmouseenter="showPopup(event,'Speaker','Used to hear voices')">
+    <img src="{{url_for('static',filename='images/speaker.jpg')}}">
+    <span>Speaker</span>
+  </div>
+
+  <div class="device" onmouseenter="showPopup(event,'Printer','Used to print or write on papers')">
+    <img src="{{url_for('static',filename='images/printer.jpg')}}">
+    <span>Printer</span>
+  </div>
+
+  <div class="device" onmouseenter="showPopup(event,'Projector','Used to show videos')">
+    <img src="{{url_for('static',filename='images/projector.jpg')}}">
+    <span>Projector</span>
+  </div>
+  <div class="device" onmouseenter="showPopup(event,'Headphone','Used to listen to sound privately without disturbing others')">
+    <img src="{{url_for('static',filename='images/head.jpeg')}}">
+    <span>Headphone</span>
+  </div>
+  <div class="device" onmouseenter="showPopup(event,'Plotter','Used to print banners or large photos')">
+    <img src="{{url_for('static',filename='images/Plotter.png')}}">
+    <span>Plotter</span>
+  </div>
+  <div class="device" onmouseenter="showPopup(event,'Sound BAR','Used to hear high quality voices')">
+    <img src="{{url_for('static',filename='images/sound.png')}}">
+    <span>Sound Bar</span>
+  </div>
+  <div class="device" onmouseenter="showPopup(event,'Smart-Board','Used to teach, write, draw, and show videos using touch or a pen')">
+    <img src="{{url_for('static',filename='images/smart.jpeg')}}">
+    <span>Smart-Board</span>
+  </div>
+</div>
+    <script>
+    let timer;
+
+    function showPopup(event, part, use) {
+    const popup = document.getElementById("popup");
+
+    popup.innerHTML = `<strong>${part}</strong><br>${use}`;
+    popup.style.left = event.pageX + 15 + "px";
+    popup.style.top = event.pageY + 15 + "px";
+
+    popup.classList.add("show");
+
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+        popup.classList.remove("show");
+    }, 2000);
+
+    speak(part, use);
+    }
+
+    function speak(part, use) {
+    let msg = new SpeechSynthesisUtterance(
+        part + ". " + use
+    );
+    msg.lang = "en-US";
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(msg);
+    }
+    </script>
+</body>
+</html>

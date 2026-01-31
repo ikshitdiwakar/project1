@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            height: 100vh;
+            width: 100%;
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to bottom right,white 20%,pink);
+        }
+        .d1{
+            display: flex;
+            /* border: 2px solid red; */
+        }
+        #c1{
+            margin-top: 1.5%;
+            /* border: 2px solid rgb(50, 19, 175); */
+            width: 100%;
+            padding: 10px;
+        }
+        #c2{
+            /* border: 2px solid black; */
+            height: 180px;
+            width: 180px;
+        }
+        #c2 img{
+            height: 180px;
+            width: 180px;
+        }
+        hr{
+            margin-top: 10px;
+        }
+        .p1{
+            border: 2px solid black;
+            border-radius: 100%;
+            width: 35%;
+            background-color: beige;
+            margin-top: 20px;
+            color: black;
+            font-size: 3rem;
+            font-weight: bolder;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            opacity: 0;
+            letter-spacing: 2px;
+            transform: translateY(40px) scale(0.95);
+            filter: blur(8px);
+            animation: pop 1s ease-out forwards;
+            animation-delay: 1s;
+        }
+        @keyframes pop {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+                filter: blur(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+        #k1{
+            width: 50%;
+        }
+        .alphabet-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            /* max-width: 600px; */
+            justify-content: center;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .letter {
+            width: 10%;
+            height: 160px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            transform-style: preserve-3d;
+            transition: transform 1s;
+            /* backface-visibility: hidden; */
+            /* transform: rotateY(180deg); */
+        }
+
+        .letter:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: #dbeafe;
+            transform: rotateY(180deg)
+
+        }
+        .letter-front,
+        .letter-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            backface-visibility: hidden;
+        }
+        .letter-front {
+            background: white;
+        }
+
+        /* back */
+        .letter-back {
+            background: #dbeafe;
+            transform: rotateY(180deg);
+            cursor: pointer;
+        }
+
+        .letter-back img {
+            width: 80%;
+            height: auto;
+        }
+        b{
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: x-large;
+        }
+    </style>
+</head>
+<body>
+    <div class="d1">
+        <div id="c2"><img src="{{url_for('static',filename='images/10.png')}}" alt="cartoon"></div>
+        <div id="c1">  {% if session.get('name')  %}
+            Welcome, <b>Name:{{ session['name'] }} | Phone No:{{ session.get('pno', 'N/A') }} |
+            Email-ID: {{ session.get('email', 'N/A') }}</b>
+            {% else %}
+            Welcome, Guest
+            {% endif %}
+            <hr>
+            <center><h1 class="p1">ALPHABET</h1></center>
+            <center><hr id="k1"></center>
+        </div>
+    </div>
+    <div class="alphabet-container">
+            <div class="letter">
+                <div class="letter-front">A</div>
+                <div class="letter-back" onmouseenter="speakA()">
+                    <img src="{{url_for('static',filename='images/11.jpeg')}}" alt="Apple">
+                 </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">B</div>
+                <div class="letter-back" onmouseenter="speakB()">
+                    <img src="{{url_for('static',filename='images/12.avif')}}" alt="Apple">
+                 </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">C</div>
+                <div class="letter-back" onmouseenter="speakC()">
+                    <img src="{{url_for('static',filename='images/13.png')}}" alt="Apple">
+                 </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">D</div>
+                <div class="letter-back" onmouseenter="speakD()">
+                    <img src="{{url_for('static',filename='images/14.avif')}}" alt="Apple">
+                 </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">E</div>
+                <div class="letter-back" onmouseenter="speakE()">
+                    <img src="{{url_for('static',filename='images/15.png')}}" alt="Apple">
+                 </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">F</div>
+                <div class="letter-back" onmouseenter="speakF()">
+                    <img src="{{url_for('static',filename='images/16.jpg')}}" alt="Fish">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">G</div>
+                <div class="letter-back" onmouseenter="speakG()">
+                    <img src="{{url_for('static',filename='images/17.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">H</div>
+                <div class="letter-back" onmouseenter="speakH()">
+                    <img src="{{url_for('static',filename='images/18.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">I</div>
+                <div class="letter-back" onmouseenter="speakI()">
+                    <img src="{{url_for('static',filename='images/19.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">J</div>
+                <div class="letter-back" onmouseenter="speakJ()">
+                    <img src="{{url_for('static',filename='images/20.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">K</div>
+                <div class="letter-back"onmouseenter="speakK()">
+                    <img src="{{url_for('static',filename='images/21.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">L</div>
+                <div class="letter-back"onmouseenter="speakL()">
+                    <img src="{{url_for('static',filename='images/22.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">M</div>
+                <div class="letter-back" onmouseenter="speakM()">
+                    <img src="{{url_for('static',filename='images/23.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">N</div>
+                <div class="letter-back" onmouseenter="speakN()">
+                    <img src="{{url_for('static',filename='images/24.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">O</div>
+                <div class="letter-back" onmouseenter="speakO()">
+                    <img src="{{url_for('static',filename='images/25.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">P</div>
+                <div class="letter-back" onmouseenter="speakP()">
+                    <img src="{{url_for('static',filename='images/26.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">Q</div>
+                <div class="letter-back" onmouseenter="speakQ()">
+                    <img src="{{url_for('static',filename='images/27.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">R</div>
+                <div class="letter-back" onmouseenter="speakR()">
+                    <img src="{{url_for('static',filename='images/28.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">S</div>
+                <div class="letter-back" onmouseenter="speakS()">
+                    <img src="{{url_for('static',filename='images/29.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">T</div>
+                <div class="letter-back" onmouseenter="speakT()">
+                    <img src="{{url_for('static',filename='images/30.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">U</div>
+                <div class="letter-back" onmouseenter="speakU()">
+                    <img src="{{url_for('static',filename='images/31.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">V</div>
+                <div class="letter-back" onmouseenter="speakV()">
+                    <img src="{{url_for('static',filename='images/32.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">W</div>
+                <div class="letter-back" onmouseenter="speakW()">
+                    <img src="{{url_for('static',filename='images/33.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">X</div>
+                <div class="letter-back" onmouseenter="speakX()">
+                    <img src="{{url_for('static',filename='images/34.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">Y</div>
+                <div class="letter-back" onmouseenter="speakY()">
+                    <img src="{{url_for('static',filename='images/35.png')}}" alt="Grapes">
+                </div>
+            </div>
+            <div class="letter">
+                <div class="letter-front">Z</div>
+                <div class="letter-back" onmouseenter="speakZ()">
+                    <img src="{{url_for('static',filename='images/36.png')}}" alt="Grapes">
+                </div>
+            </div>
+        </div>
+        <script>
+            function speakA() {
+            let text = new
+            SpeechSynthesisUtterance("A for Apple");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakB() {
+            let text = new
+            SpeechSynthesisUtterance("B for Ball");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakC() {
+            let text = new
+            SpeechSynthesisUtterance("C for Cat");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakD() {
+            let text = new
+            SpeechSynthesisUtterance("D for Dog");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakE() {
+            let text = new
+            SpeechSynthesisUtterance("E for Egg");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakF() {
+            let text = new
+            SpeechSynthesisUtterance("F for Fish");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakG() {
+            let text = new
+            SpeechSynthesisUtterance("G for Grapes");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakH() {
+            let text = new
+            SpeechSynthesisUtterance("H for Hut");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakI() {
+            let text = new
+            SpeechSynthesisUtterance("I for Ice Cream");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakJ() {
+            let text = new
+            SpeechSynthesisUtterance("J for Jar");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakK() {
+            let text = new
+            SpeechSynthesisUtterance("K for Kite");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakL() {
+            let text = new
+            SpeechSynthesisUtterance("L for Lamp");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakM() {
+            let text = new
+            SpeechSynthesisUtterance("M for Monkey");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakN() {
+            let text = new
+            SpeechSynthesisUtterance("N for Nest");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakO() {
+            let text = new
+            SpeechSynthesisUtterance("O for Orange");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakP() {
+            let text = new
+            SpeechSynthesisUtterance("P for Pen");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakQ() {
+            let text = new
+            SpeechSynthesisUtterance("Q for Quill");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakR() {
+            let text = new
+            SpeechSynthesisUtterance("R for Rabbit");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakS() {
+            let text = new
+            SpeechSynthesisUtterance("S for Sun");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakT() {
+            let text = new
+            SpeechSynthesisUtterance("T for Train");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakU() {
+            let text = new
+            SpeechSynthesisUtterance("U for Umbrella");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakV() {
+            let text = new
+            SpeechSynthesisUtterance("V for Van");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakW() {
+            let text = new
+            SpeechSynthesisUtterance("W for Water Melon");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakX() {
+            let text = new
+            SpeechSynthesisUtterance("X for Xylophone");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakY() {
+            let text = new
+            SpeechSynthesisUtterance("Y for Yart");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+            function speakZ() {
+            let text = new
+            SpeechSynthesisUtterance("Z for Zebra");
+            text.lang = "en-US";
+            window.speechSynthesis.speak(text);
+            }
+        </script>
+</body>
+</html>

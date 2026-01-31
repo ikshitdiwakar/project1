@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            height: 100vh;
+            width: 100%;
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to bottom right,white 20%,pink);
+        }
+        .d1{
+            display: flex;
+            /* border: 2px solid red; */
+        }
+        #c1{
+            margin-top: 1.5%;
+            /* border: 2px solid rgb(50, 19, 175); */
+            width: 100%;
+            padding: 10px;
+        }
+        #c2{
+            /* border: 2px solid black; */
+            height: 180px;
+            width: 180px;
+        }
+        #c2 img{
+            height: 180px;
+            width: 180px;
+        }
+        hr{
+            margin-top: 10px;
+        }
+        .p1{
+            border: 2px solid black;
+            border-radius: 100%;
+            width: 35%;
+            background-color: beige;
+            margin-top: 10px;
+            color: black;
+            font-size: 3rem;
+            font-weight: bolder;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            opacity: 0;
+            letter-spacing: 2px;
+            transform: translateY(40px) scale(0.95);
+            filter: blur(8px);
+            animation: pop 1s ease-out forwards;
+            animation-delay: 1s;
+        }
+        @keyframes pop {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+                filter: blur(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+        #k1{
+            width: 50%;
+        }
+        b{
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: x-large;
+        }
+        .container{
+        width:90%;
+        max-width:1000px;
+        display:flex;
+        margin-left: 19%;
+        gap:20px;
+        background:#ffffff;
+        border-radius:20px;
+        padding:20px;
+        box-shadow:0 15px 30px rgba(0,0,0,0.25);
+        }
+
+        .poem-box{
+        flex:1;
+        background:#fff7e6;
+        border-radius:15px;
+        padding:20px;
+        }
+
+        .poem-box h2{
+        text-align:center;
+        color:#ff6f00;
+        }
+
+        .poem{
+        font-size:18px;
+        line-height:1.8;
+        margin-top:15px;
+        }
+
+        .buttons{
+        text-align:center;
+        margin-top:20px;
+        }
+
+        button{
+        padding:10px 18px;
+        margin:5px;
+        border:none;
+        border-radius:20px;
+        font-size:16px;
+        cursor:pointer;
+        background:#ff9800;
+        color:white;
+        transition:0.3s;
+        }
+
+        button:hover{
+        background:#f57c00;
+        }
+
+        .image-box{
+        flex:1;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        }
+
+        .image-box img{
+        max-width:100%;
+        max-height:300px;
+        border-radius:20px;
+        box-shadow:0 10px 20px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="d1">
+        <div id="c2"><img src="{{url_for('static',filename='images/10.png')}}" alt="cartoon"></div>
+        <div id="c1">  {% if session.get('name')  %}
+            Welcome, <b>Name:{{ session['name'] }} | Phone No:{{ session.get('pno', 'N/A') }} |
+            Email-ID: {{ session.get('email', 'N/A') }}</b>
+            {% else %}
+            Welcome, Guest
+            {% endif %}
+            <hr>
+            <center><h1 class="p1">POEM HOUSE</h1></center>
+            <center><hr id="k1"></center>
+        </div>
+    </div>
+    <div class="container">
+        <div class="poem-box">
+            <h2 id="poemTitle">Twinkle Twinkle</h2>
+            <div class="poem" id="poemText">
+            Twinkle, twinkle, little star,<br>
+            How I wonder what you are!<br>
+            Up above the world so high,<br>
+            Like a diamond in the sky.
+            </div>
+            <div class="buttons">
+            <button onclick="playPoem()">Play Poem</button>
+            <button onclick="changePoem()">Change Poem</button>
+            </div>
+            <audio id="audioPlayer">
+                <!-- <source src="/static/images/Twinkle.mp3" type="audio/mp3"> -->
+                <!-- <source src="/static/images/Rain.mp3" type="audio/mp3">
+                <source src="/static/images/Sheep.mp3" type="audio/mp3">
+                <source src="/static/images/Fish.mp3" type="audio/mp3"> -->
+            </audio>
+        </div>
+        <div class="image-box">
+            <img id="poemImage" src="{{url_for('static',filename='images/poem1.jpg')}}">
+        </div>
+        </div>
+        <script>
+            let index = 0;
+            const poems = [
+            {
+                title: "Twinkle Twinkle",
+                text: `Twinkle, twinkle, little star,
+            How I wonder what you are!
+            Up above the world so high,
+            Like a diamond in the sky.`,
+                img: "{{url_for('static',filename='images/poem1.jpg')}}",
+                audio: "/static/images/Twinkle.mp3"
+            },
+            {
+                title: "Rain Rain",
+                text: `Rain, rain, go away,
+            Come again another day.
+            Little children want to play,
+            Rain, rain, go away.`,
+                img: "{{url_for('static',filename='images/poem2.jpg')}}",
+                audio: "/static/images/Rain.mp3"
+            },
+            {
+                title: "Baa Baa Black Sheep",
+                text: `Baa, baa, black sheep,
+            Have you any wool?
+            Yes sir, yes sir,
+            Three bags full.
+            One for the master,
+            One for the dame,
+            And one for the little boy
+            Who lives down the lane.`,
+                img: "{{url_for('static',filename='images/poem3.jpeg')}}",
+                audio: "/static/images/Sheep.mp3"
+            },
+            {
+            title: "मछली जल की रानी",
+            text: `मछली जल की रानी है,
+            जीवन उसका पानी है।
+            हाथ लगाओ डर जाएगी,
+            बाहर निकालो मर जाएगी।`,
+            img: "{{url_for('static',filename='images/poem4.jpg')}}",
+            audio: "/static/images/Fish.mp3"
+            },
+            {
+            title: "चंदा मामा",
+            text: `चंदा मामा दूर के,
+            पूए पकाए बूर के।
+            आप खाएं थाली में,
+            मुन्ने को दें प्याली में।
+            प्याली गई टूट,
+            मुन्ना गया रूठ।
+            लाएंगे नई प्याली,
+            मुन्ने को मनाएंगे।`,
+            img: "{{url_for('static',filename='images/poem5.jpg')}}",
+            audio: "/static/images/Moon.MPEG"
+            },
+            {
+            title: "नानी तेरी मोरनी",
+            text: `नानी तेरी मोरनी को मोर ले गए,
+            बाकी जो बचा था काले चोर ले गए।
+            खाके पीके मोटे होके,
+            चोर बैठे रेल में।
+            नानी की मोरनी खो गई,
+            रोती-रोती खेल में।
+            नानी बोली ढूंढ के लाओ,
+            मैं दूँगी इनाम।
+            जो मेरी मोरनी लाएगा,
+            उसका होगा नाम।`,
+            img: "{{url_for('static',filename='images/poem6.jpg')}}",
+            audio: "/static/images/Peacook.MPEG"
+            }
+
+            ];
+            function playPoem() {
+    const audio = document.getElementById("audioPlayer");
+    audio.src = poems[index].audio;   // SET SOURCE FIRST
+    audio.load();                     // FORCE RELOAD
+    audio.play();                     // THEN PLAY
+}
+
+function changePoem() {
+    index = (index + 1) % poems.length;
+
+    document.getElementById("poemTitle").innerText = poems[index].title;
+    document.getElementById("poemText").innerHTML =
+        poems[index].text.replaceAll("\n", "<br>");
+    document.getElementById("poemImage").src = poems[index].img;
+
+    const audio = document.getElementById("audioPlayer");
+    audio.pause();
+    audio.currentTime = 0; // reset audio
+}
+
+        </script>
+</body>
+</html>
