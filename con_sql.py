@@ -1,10 +1,9 @@
 import mysql.connector
-from urllib.parse import urlparse
 import os
+from urllib.parse import urlparse
 
 def con_to_sql():
-    db_url = "mysql://root:pass@mysql.railway.internal:3306/railway"
-    url = urlparse(db_url)
+    url = urlparse(os.environ.get("MYSQL_PUBLIC_URL"))
 
     return mysql.connector.connect(
         host=url.hostname,
