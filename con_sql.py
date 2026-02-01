@@ -1,11 +1,10 @@
-import pyodbc
+import mysql.connector
+import os
 
-def con_to_sql():
-    try:
-        conn=pyodbc.connect('DRIVER={SQL Server};'
-                            'SERVER=DESKTOP-DNPGNND\SQLEXPRESS;'
-                            'DATABASE=funlearn;'
-                            'Trusted_Connection=yes')
-        return conn
-    except Exception as e:
-        return None
+def get_connection():
+    return mysql.connector.connect(
+        host=os.environ.get("DB_HOST"),
+        user=os.environ.get("DB_USER"),
+        password=os.environ.get("DB_PASSWORD"),
+        database=os.environ.get("DB_NAME")
+    )
