@@ -1,11 +1,15 @@
 import mysql.connector
+from urllib.parse import urlparse
 import os
 
 def con_to_sql():
+    db_url = "mysql://root:pass@mysql.railway.internal:3306/railway"
+    url = urlparse(db_url)
+
     return mysql.connector.connect(
-        host=os.environ.get("MYSQLHOST"),
-        user=os.environ.get("MYSQLUSER"),
-        password=os.environ.get("MYSQLPASSWORD"),
-        database=os.environ.get("MYSQLDATABASE"),
-        port=int(os.environ.get("MYSQLPORT", 39009))
+        host=url.hostname,
+        user=url.username,
+        password=url.password,
+        database=url.path.lstrip('/'),
+        port=url.port
     )
