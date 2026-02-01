@@ -33,22 +33,27 @@ def rhym():
 def poem():
     return render_template('poem.html')
 
-@app.route('/submit',methods=['GET','POST'])
+@app.route('/submit', methods=['POST'])
 def submit():
-    if request.method=='POST':
-        name=request.form['name']
-        pno=request.form['pno']
-        email=request.form['email']
-        city=request.form['city']
-        gen=request.form['gender']
-        conn=con_to_sql()
-        cursor=conn.cursor()
-        cursor.execute("INSERT INTO fun_and_learn (Name,Phone_No,Email,City_or_State,Gender) VALUES(?,?,?,?,?)",(name,pno,email,city,gen))
-        conn.commit()
-        session['name']=name
-        session['pno']=pno
-        session['email']=email
-    return render_template('home.html')
+    name = request.form.get('name')
+    pno = request.form.get('pno')
+    email = request.form.get('email')
+    city = request.form.get('city')
+    gen = request.form.get('gender', '')
+
+    conn = con_to_sql()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "INSERT INTO fun_and_learn (Name, Phone_No, Email, City_or_State, Gender) VALUES (%s,%s,%s,%s,%s)",
+        (name, pno, email, city, gen)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect('/')
+
 
 @app.route('/logout')
 def logout():
@@ -58,6 +63,7 @@ def logout():
 if __name__ == '__main__':
      port = int(os.environ.get("PORT", 5000))
      app.run(host="0.0.0.0", port=port)
+
 
 
 
