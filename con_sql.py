@@ -1,7 +1,7 @@
 import mysql.connector
 import os
 
-def get_connection():
+def con_to_sql():
     return mysql.connector.connect(
         host=os.environ.get("DB_HOST"),
         user=os.environ.get("DB_USER"),
