@@ -53,6 +53,28 @@ def submit():
     conn.close()
 
     return redirect("/")
+@app.route("/create-table")
+def create_table():
+    try:
+        conn = con_to_sql()
+        cur = conn.cursor()
+
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS users (
+                id SERIAL PRIMARY KEY,
+                name TEXT NOT NULL,
+                email TEXT NOT NULL
+            );
+        """)
+
+        conn.commit()
+        cur.close()
+        conn.close()
+
+        return " TABLE CREATED SUCCESSFULLY"
+
+    except Exception as e:
+        return f" ERROR: {e}"
 
 
 
@@ -64,6 +86,7 @@ def logout():
 if __name__ == '__main__':
      port = int(os.environ.get("PORT", 5000))
      app.run(host="0.0.0.0", port=port)
+
 
 
 
