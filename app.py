@@ -112,15 +112,10 @@ def init_db():
     conn.commit()
     cur.close()
     conn.close()
-# imports
-from flask import Flask, request
 import psycopg2
 import os
 from urllib.parse import urlparse
 
-app = Flask(__name__)
-
-# 🔹 TABLE CREATION FUNCTION (NOT A ROUTE)
 def create_table():
     url = urlparse(os.environ["DATABASE_URL"])
     conn = psycopg2.connect(
@@ -132,6 +127,7 @@ def create_table():
         sslmode="require"
     )
     cur = conn.cursor()
+
     cur.execute("""
         CREATE TABLE IF NOT EXISTS users (
             id SERIAL PRIMARY KEY,
@@ -141,9 +137,11 @@ def create_table():
             city_or_state TEXT
         );
     """)
+
     conn.commit()
     cur.close()
     conn.close()
+
 
 # 🔹 CALL IT ONCE
 create_table()
@@ -160,6 +158,7 @@ if __name__ == '__main__':
      app.run(host="0.0.0.0", port=port)
 
 init_db()
+
 
 
 
