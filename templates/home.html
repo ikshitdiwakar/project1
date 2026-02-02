@@ -164,21 +164,21 @@
             <center><h1>FUN AND LEARN</h1></center>
             <hr><br>
             <div id="i5">
-            <form class="c1" action="{{url_for('submit')}} " method="post">
+            <form class="c1" action="{{ url_for('submit') }}" " method="post">
                     <center><h2>Personal Details</h2></center>
                     <hr>
                     <div class="t1"><Label>Name:</Label>
-                    <input type="text" name="name"><br>
+                    <input type="text" name="name" required><br>
                     <Label class="t2">Phone Number:</Label>
-                    <input type="text" name="pno"><br></div>
+                    <input type="text" name="pno" required><br></div>
                     <div class="t1"><Label>Email Id:</Label>
-                    <input type="text" name="email"><br>
+                    <input type="email" name="email" required><br>
                     <Label class="t2">City or State:</Label>
-                    <input type="text" name="city"><br></div>
+                    <input type="text" name="city" required><br></div>
                     <div class="t1"><Label>Gender:</Label>
                     <input type="radio" name="gender" value="Male">Male
                     <input type="radio" name="gender" value="Female">Female</div>
-                    <div class="t1" id="i8"><button>Submitt</button></div>
+                    <div class="t1" id="i8"><button type="submit">Submit</button></div>
                     </form>
             <div><img src="{{url_for('static',filename='images/10.png')}}" alt="cartoon" id="i7" width="38%"></div>
             </div>
@@ -216,4 +216,5 @@
     </div>
 
 </body>
+
 </html>
