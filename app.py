@@ -33,26 +33,27 @@ def rhym():
 def poem():
     return render_template('poem.html')
 
-@app.route('/submit', methods=['POST'])
+@app.route("/submit", methods=["POST"])
 def submit():
-    name = request.form.get('name')
-    pno = request.form.get('pno')
-    email = request.form.get('email')
-    city = request.form.get('city')
-    gen = request.form.get('gender', '')
+    name = request.form.get("name")
+    phone_no = request.form.get("phone_no")
+    email = request.form.get("email")
+    city_or_state = request.form.get("city_or_state")
 
     conn = con_to_sql()
-    cursor = conn.cursor()
+    cur = conn.cursor()
 
-    cursor.execute(
-        "INSERT INTO fun_and_learn (Name, Phone_No, Email, City_or_State, Gender) VALUES (%s,%s,%s,%s,%s)",
-        (name, pno, email, city, gen)
+    cur.execute(
+        "INSERT INTO users (name, phone_no, email, city_or_state) VALUES (%s, %s)",
+        (name, phone_no, email, city_or_state)
     )
 
     conn.commit()
+    cur.close()
     conn.close()
 
-    return redirect('/')
+    return redirect("/")
+
 
 
 @app.route('/logout')
@@ -63,6 +64,7 @@ def logout():
 if __name__ == '__main__':
      port = int(os.environ.get("PORT", 5000))
      app.run(host="0.0.0.0", port=port)
+
 
 
 
