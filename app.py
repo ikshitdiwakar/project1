@@ -83,6 +83,33 @@ def test_db():
     except Exception as e:
         return f"❌ {e}"
 
+import psycopg2
+import os
+from urllib.parse import urlparse
+
+def init_db():
+    url = urlparse(os.environ["DATABASE_URL"])
+    conn = psycopg2.connect(
+        dbname=url.path[1:],
+        user=url.username,
+        password=url.password,
+        host=url.hostname,
+        port=url.port,
+        sslmode="require"
+    )
+
+    cur = conn.cursor()
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS contact_form (
+            id SERIAL PRIMARY KEY,
+            name TEXT,
+            email TEXT,
+            message TEXT
+        );
+    """)
+    conn.commit()
+    cur.close()
+    conn.close()
 
 
 @app.route('/logout')
@@ -93,6 +120,8 @@ def logout():
 if __name__ == '__main__':
      port = int(os.environ.get("PORT", 5000))
      app.run(host="0.0.0.0", port=port)
+
+init_db()
 
 
 
