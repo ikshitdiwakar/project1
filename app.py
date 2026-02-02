@@ -8,7 +8,12 @@ app.secret_key = "supersecretkey"
 
 @app.route('/')
 def home():
-    return render_template ('home.html')
+    return render_template (
+        'home.html',
+        name=session.get("name"),
+        phone=session.get("pno"),
+        email=session.get("email")
+    )
 @app.route('/num')
 def num():
     return render_template('num.html')
@@ -49,11 +54,14 @@ def submit():
         "INSERT INTO users (name, phone_no, email, city_or_state) VALUES (%s, %s, %s, %s)",
         (name, phone_no, email, city_or_state)
     )
-
+    user_id = cur.fetchone()[0]
     conn.commit()            # save to DB
     cur.close()
     conn.close()
-    
+    session["user_id"] = user_id
+    session["name"] = name
+    session["pno"] = phone_no
+    session["email"] = email
     flash("Form submitted successfully!", "success")
     return redirect(url_for("home"))
 
@@ -93,16 +101,29 @@ create_table()
 
 
 
-@app.route('/logout')
+@app.route("/logout")
 def logout():
-    session.clear()
-    return redirect('/')
+    user_id = session.get("user_id")
+
+    if user_id:
+        conn = con_to_sql()
+        cur = conn.cursor()
+        cur.execute("DELETE FROM users WHERE id = %s", (user_id,))
+        conn.commit()
+        cur.close()
+        conn.close()
+
+    session.clear()   # 🔥 clears name, email, id
+
+    flash("Logged out successfully", "success")
+    return redirect(url_for("home"))
 
 if __name__ == '__main__':
      port = int(os.environ.get("PORT", 5000))
      app.run(host="0.0.0.0", port=port)
 
 init_db()
+
 
 
 
