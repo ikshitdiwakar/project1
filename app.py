@@ -49,19 +49,27 @@ def submit():
     conn = con_to_sql()      # DB connection
     cur = conn.cursor()     # cursor
 
-    # 👉 PUT THIS HERE 👇
     cur.execute(
-        "INSERT INTO users (name, phone_no, email, city_or_state) VALUES (%s, %s, %s, %s)",
+        """
+        INSERT INTO users (name, phone_no, email, city_or_state)
+        VALUES (%s, %s, %s, %s)
+        RETURNING id
+        """,
         (name, phone_no, email, city_or_state)
     )
-    user_id = cur.fetchone()[0]
-    conn.commit()            # save to DB
+
+    user_id = cur.fetchone()[0]   # ✅ NOW VALID
+
+    conn.commit()
     cur.close()
     conn.close()
+
+    # ✅ SESSION DATA
     session["user_id"] = user_id
     session["name"] = name
     session["pno"] = phone_no
     session["email"] = email
+
     flash("Form submitted successfully!", "success")
     return redirect(url_for("home"))
 
@@ -103,12 +111,12 @@ create_table()
 
 @app.route("/logout")
 def logout():
-    email = session.get("email")
+    user_id = session.get("user_id")
 
-    if email:
+    if user_id:
         conn = con_to_sql()
         cur = conn.cursor()
-        cur.execute("DELETE FROM users WHERE email = %s", (email,))
+        cur.execute("DELETE FROM users WHERE id = %s", (user_id,))
         conn.commit()
         cur.close()
         conn.close()
@@ -117,11 +125,13 @@ def logout():
     return redirect(url_for("home"))
 
 
+
 if __name__ == '__main__':
      port = int(os.environ.get("PORT", 5000))
      app.run(host="0.0.0.0", port=port)
 
-init_db()
+
+
 
 
 
