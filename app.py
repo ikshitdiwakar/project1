@@ -35,24 +35,26 @@ def poem():
 
 @app.route("/submit", methods=["POST"])
 def submit():
-    name = request.form.get("name")
-    phone_no = request.form.get("phone_no")
-    email = request.form.get("email")
-    city_or_state = request.form.get("city_or_state")
+    name = request.form["name"]
+    phone_no = request.form["phone_no"]
+    email = request.form["email"]
+    city_or_state = request.form["city_or_state"]
 
-    conn = con_to_sql()
-    cur = conn.cursor()
+    conn = con_to_sql()      # DB connection
+    cur = conn.cursor()     # cursor
 
+    # 👉 PUT THIS HERE 👇
     cur.execute(
-        "INSERT INTO users (name, phone_no, email, city_or_state) VALUES (%s, %s)",
+        "INSERT INTO users (name, phone_no, email, city_or_state) VALUES (%s, %s, %s, %s)",
         (name, phone_no, email, city_or_state)
     )
 
-    conn.commit()
+    conn.commit()            # save to DB
     cur.close()
     conn.close()
 
-    return redirect("/")
+    return "Form submitted successfully"
+
 @app.route("/create-table")
 def create_table():
     try:
@@ -122,6 +124,7 @@ if __name__ == '__main__':
      app.run(host="0.0.0.0", port=port)
 
 init_db()
+
 
 
 
