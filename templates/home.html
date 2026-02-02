@@ -140,6 +140,24 @@
                     filter: blur(0);
                 }
             }
+        .popup {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 9999;
+            animation: fadeOut 4s forwards;
+        }
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; display: none; }
+        }
     </style>
 </head>
 <body >
@@ -163,6 +181,15 @@
         <main class="content">
             <center><h1>FUN AND LEARN</h1></center>
             <hr><br>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="popup success">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
             <div id="i5">
             <form class="c1" action="{{ url_for('submit') }}" " method="post">
                     <center><h2>Personal Details</h2></center>
@@ -218,3 +245,4 @@
 </body>
 
 </html>
+
