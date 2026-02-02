@@ -55,63 +55,6 @@ def submit():
 
     return "Form submitted successfully"
 
-@app.route("/create-table")
-def create_table():
-    try:
-        conn = con_to_sql()
-        cur = conn.cursor()
-
-        cur.execute("""
-            CREATE TABLE IF NOT EXISTS users (
-                id SERIAL PRIMARY KEY,
-                name TEXT NOT NULL,
-                email TEXT NOT NULL
-            );
-        """)
-
-        conn.commit()
-        cur.close()
-        conn.close()
-
-        return " TABLE CREATED SUCCESSFULLY"
-
-    except Exception as e:
-        return f" ERROR: {e}"
-@app.route("/test-db")
-def test_db():
-    try:
-        con_to_sql()
-        return "DB CONNECTED"
-    except Exception as e:
-        return f"❌ {e}"
-
-import psycopg2
-import os
-from urllib.parse import urlparse
-
-def init_db():
-    url = urlparse(os.environ["DATABASE_URL"])
-    conn = psycopg2.connect(
-        dbname=url.path[1:],
-        user=url.username,
-        password=url.password,
-        host=url.hostname,
-        port=url.port,
-        sslmode="require"
-    )
-
-    cur = conn.cursor()
-    cur.execute("""
-        CREATE TABLE IF NOT EXISTS contact_form (
-            id SERIAL PRIMARY KEY,
-            name TEXT,
-            email TEXT,
-            message TEXT
-        );
-    """)
-    conn.commit()
-    cur.close()
-    conn.close()
 import psycopg2
 import os
 from urllib.parse import urlparse
@@ -158,6 +101,7 @@ if __name__ == '__main__':
      app.run(host="0.0.0.0", port=port)
 
 init_db()
+
 
 
 
