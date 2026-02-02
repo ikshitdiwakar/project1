@@ -102,26 +102,26 @@ create_table()
 
 @app.route("/logout")
 def logout():
-    user_id = session.get("user_id")
+    email = session.get("email")
 
-    if user_id:
+    if email:
         conn = con_to_sql()
         cur = conn.cursor()
-        cur.execute("DELETE FROM users WHERE id = %s", (user_id,))
+        cur.execute("DELETE FROM users WHERE email = %s", (email,))
         conn.commit()
         cur.close()
         conn.close()
 
-    session.clear()   # 🔥 clears name, email, id
-
-    flash("Logged out successfully", "success")
+    session.clear()
     return redirect(url_for("home"))
+
 
 if __name__ == '__main__':
      port = int(os.environ.get("PORT", 5000))
      app.run(host="0.0.0.0", port=port)
 
 init_db()
+
 
 
 
