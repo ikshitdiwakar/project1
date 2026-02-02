@@ -54,7 +54,6 @@ def submit():
         "INSERT INTO users (name, phone_no, email, city_or_state) VALUES (%s, %s, %s, %s)",
         (name, phone_no, email, city_or_state)
     )
-    user_id = cur.fetchone()[0]
     conn.commit()            # save to DB
     cur.close()
     conn.close()
@@ -123,6 +122,7 @@ if __name__ == '__main__':
      app.run(host="0.0.0.0", port=port)
 
 init_db()
+
 
 
 
