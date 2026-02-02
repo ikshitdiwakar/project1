@@ -177,6 +177,13 @@
                 <li><a href="{{url_for('logout')}}">Logout</a></li>
                 <li><a href="#">Coming Soon</a></li></center>
             </ul>
+            {% if name %}
+            <div class="user-info">
+                <span class="user-item">{{ name }}</span>
+                <span class="user-item">{{ pno }}</span>
+                <span class="user-item">{{ email }}</span>
+            </div>
+            {% endif %}
         </nav>
         <main class="content">
             <center><h1>FUN AND LEARN</h1></center>
@@ -245,4 +252,5 @@
 </body>
 
 </html>
+
 
