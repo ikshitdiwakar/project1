@@ -1,9 +1,10 @@
-from flask import Flask, render_template,redirect,request,session,url_for
+from flask import Flask, render_template,redirect,request,session,url_for,flash
 from con_sql import con_to_sql
 import os
 
 app = Flask(__name__)
 app.secret_key="dhawal123"
+app.secret_key = "supersecretkey"
 
 @app.route('/')
 def home():
@@ -52,7 +53,8 @@ def submit():
     conn.commit()            # save to DB
     cur.close()
     conn.close()
-
+    
+    flash("Form submitted successfully!", "success")
     return redirect(url_for("home"))
 
 import psycopg2
@@ -101,6 +103,7 @@ if __name__ == '__main__':
      app.run(host="0.0.0.0", port=port)
 
 init_db()
+
 
 
 
