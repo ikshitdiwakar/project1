@@ -36,9 +36,9 @@ def poem():
 @app.route("/submit", methods=["POST"])
 def submit():
     name = request.form["name"]
-    phone_no = request.form["phone_no"]
+    phone_no = request.form["pno"]
     email = request.form["email"]
-    city_or_state = request.form["city_or_state"]
+    city_or_state = request.form["city"]
 
     conn = con_to_sql()      # DB connection
     cur = conn.cursor()     # cursor
@@ -158,6 +158,7 @@ if __name__ == '__main__':
      app.run(host="0.0.0.0", port=port)
 
 init_db()
+
 
 
 
