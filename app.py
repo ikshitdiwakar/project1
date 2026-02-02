@@ -79,7 +79,7 @@ def create_table():
 def test_db():
     try:
         con_to_sql()
-        return " DB CONNECTED"
+        return "DB CONNECTED"
     except Exception as e:
         return f"❌ {e}"
 
@@ -93,6 +93,7 @@ def logout():
 if __name__ == '__main__':
      port = int(os.environ.get("PORT", 5000))
      app.run(host="0.0.0.0", port=port)
+
 
 
 
