@@ -177,7 +177,7 @@
                 <li><a href="{{url_for('logout')}}">Logout</a></li>
                 <li><a href="#">Coming Soon</a></li></center>
             </ul>
-            {% if name %}
+            {% if name is defined and name %}
             <div class="user-info">
                 <span class="user-item">{{ name }}</span>
                 <span class="user-item">{{ pno }}</span>
@@ -252,5 +252,6 @@
 </body>
 
 </html>
+
 
 
